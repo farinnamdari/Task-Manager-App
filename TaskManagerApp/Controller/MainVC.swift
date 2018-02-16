@@ -25,6 +25,20 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         //generateTestData()  // remove this
         attemptFetch(index: 0)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTaskDetailsVCEdit" {
+            guard let destination = segue.destination as? TaskDetailsVC else {
+                return
+            }
+            
+            guard let task = sender as? Task else {
+                return
+            }
+            
+            destination.taskToEdit = task
+        }
+    }
 
     // MARK: - UITableViewDelegate/UITableViewDataSource methods
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,6 +65,16 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let tasks = frController.fetchedObjects, tasks.count > 0 else {
+            return
+        }
+        
+        let task = tasks[indexPath.row]
+        
+        performSegue(withIdentifier: "showTaskDetailsVCEdit", sender: task)
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

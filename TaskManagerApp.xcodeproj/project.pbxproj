@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC99B63320373872005A804C /* TaskDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC99B63220373871005A804C /* TaskDetailsVC.swift */; };
+		AC99B635203745B5005A804C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC99B634203745B4005A804C /* CustomTextField.swift */; };
 		ACDC78042035E3360071315F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78032035E3360071315F /* AppDelegate.swift */; };
 		ACDC78062035E3360071315F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78052035E3360071315F /* MainVC.swift */; };
 		ACDC78092035E3360071315F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDC78072035E3360071315F /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC99B63220373871005A804C /* TaskDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsVC.swift; sourceTree = "<group>"; };
+		AC99B634203745B4005A804C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		ACDC78002035E3360071315F /* TaskManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDC78032035E3360071315F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACDC78052035E3360071315F /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDC78052035E3360071315F /* MainVC.swift */,
+				AC99B63220373871005A804C /* TaskDetailsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDC78372035FF220071315F /* TaskCell.swift */,
+				AC99B634203745B4005A804C /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,7 +295,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC99B63320373872005A804C /* TaskDetailsVC.swift in Sources */,
 				ACDC78382035FF220071315F /* TaskCell.swift in Sources */,
+				AC99B635203745B5005A804C /* CustomTextField.swift in Sources */,
 				ACDC780C2035E3360071315F /* TaskManagerApp.xcdatamodeld in Sources */,
 				ACDC78062035E3360071315F /* MainVC.swift in Sources */,
 				ACDC78042035E3360071315F /* AppDelegate.swift in Sources */,

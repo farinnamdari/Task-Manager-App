@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="132" width="375" height="535"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="11" reuseIdentifier="TaskCell" rowHeight="78" id="BsE-6U-V3b" customClass="TaskCell" customModule="TaskManagerApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="11" reuseIdentifier="TaskCell" rowHeight="78" id="BsE-6U-V3b" customClass="TaskCell" customModule="TaskManagerApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BsE-6U-V3b" id="KBC-68-Gs4">
@@ -61,6 +61,14 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="cIV-wJ-6AZ">
+                                                            <rect key="frame" x="305" y="8" width="40" height="40"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ek-rg-cVO">
+                                                            <rect key="frame" x="301" y="6" width="45" height="45"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -101,16 +109,103 @@
                     <navigationItem key="navigationItem" title="Task Manager" id="XQv-o0-TQb">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gyj-lQ-LaT">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="owD-Ex-mAX" kind="show" identifier="showTaskDetailsVCNew" id="vhA-yr-q0m"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="taskSegControl" destination="w1r-IV-SSh" id="MV0-sq-k97"/>
                         <outlet property="taskTableView" destination="Gny-zx-jUF" id="IYr-eh-HsF"/>
+                        <segue destination="owD-Ex-mAX" kind="show" identifier="showTaskDetailsVCEdit" id="2qL-a1-UNB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="492" y="33.733133433283363"/>
+        </scene>
+        <!--Add/Edit-->
+        <scene sceneID="FMm-7E-i00">
+            <objects>
+                <viewController id="owD-Ex-mAX" customClass="TaskDetailsVC" customModule="TaskManagerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aQ1-UY-Ulm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S34-tv-23Y" customClass="CustomTextField" customModule="TaskManagerApp" customModuleProvider="target">
+                                <rect key="frame" x="20" y="84" width="335" height="40"/>
+                                <color key="backgroundColor" white="0.85356987847222221" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="4tQ-bD-lMU"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="orO-T7-XgA" customClass="CustomTextField" customModule="TaskManagerApp" customModuleProvider="target">
+                                <rect key="frame" x="20" y="134" width="335" height="60"/>
+                                <color key="backgroundColor" white="0.85356987849999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hBH-Vd-lMh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Dw8-Zn-ybv">
+                                <rect key="frame" x="20" y="610" width="335" height="37"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ad2-gf-HEe">
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="37"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="0.85356987849999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveBtnPressed:" destination="owD-Ex-mAX" eventType="touchUpInside" id="9Cg-F5-nM7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Piy-hb-qnh">
+                                        <rect key="frame" x="170" y="0.0" width="165" height="37"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="0.85356987849999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JzM-a1-99I" firstAttribute="trailing" secondItem="S34-tv-23Y" secondAttribute="trailing" constant="20" id="9fG-lL-lBn"/>
+                            <constraint firstItem="orO-T7-XgA" firstAttribute="leading" secondItem="JzM-a1-99I" secondAttribute="leading" constant="20" id="P1z-kz-T9Q"/>
+                            <constraint firstItem="JzM-a1-99I" firstAttribute="bottom" secondItem="Dw8-Zn-ybv" secondAttribute="bottom" constant="20" id="WLh-cK-Toe"/>
+                            <constraint firstItem="orO-T7-XgA" firstAttribute="top" secondItem="S34-tv-23Y" secondAttribute="bottom" constant="10" id="ZSN-96-L5U"/>
+                            <constraint firstItem="S34-tv-23Y" firstAttribute="top" secondItem="JzM-a1-99I" secondAttribute="top" constant="20" id="kuu-m9-qzv"/>
+                            <constraint firstItem="JzM-a1-99I" firstAttribute="trailing" secondItem="orO-T7-XgA" secondAttribute="trailing" constant="20" id="peW-FK-52K"/>
+                            <constraint firstItem="JzM-a1-99I" firstAttribute="trailing" secondItem="Dw8-Zn-ybv" secondAttribute="trailing" constant="20" id="vcc-KI-gk1"/>
+                            <constraint firstItem="Dw8-Zn-ybv" firstAttribute="leading" secondItem="JzM-a1-99I" secondAttribute="leading" constant="20" id="wwO-Mh-ROQ"/>
+                            <constraint firstItem="S34-tv-23Y" firstAttribute="leading" secondItem="JzM-a1-99I" secondAttribute="leading" constant="20" id="ytD-0K-N46"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JzM-a1-99I"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add/Edit" id="xVL-FR-TLL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="n0j-EV-afg">
+                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="deleteBtnPressed:" destination="owD-Ex-mAX" id="3Yo-gF-auc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="detailsTxtField" destination="orO-T7-XgA" id="nia-JM-x4v"/>
+                        <outlet property="titleTxtField" destination="S34-tv-23Y" id="pZO-vH-cGO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1g-nI-9XN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1404" y="33.733133433283363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sg1-sX-hqJ">
@@ -120,6 +215,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dIh-Ee-xkY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -135,4 +231,10 @@
             <point key="canvasLocation" x="-370" y="34"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="edit" width="225" height="225"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="2qL-a1-UNB"/>
+    </inferredMetricsTieBreakers>
 </document>
