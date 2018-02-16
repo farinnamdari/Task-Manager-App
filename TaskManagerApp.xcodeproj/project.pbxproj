@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		ACDC78042035E3360071315F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78032035E3360071315F /* AppDelegate.swift */; };
-		ACDC78062035E3360071315F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78052035E3360071315F /* ViewController.swift */; };
+		ACDC78062035E3360071315F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78052035E3360071315F /* MainVC.swift */; };
 		ACDC78092035E3360071315F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDC78072035E3360071315F /* Main.storyboard */; };
 		ACDC780C2035E3360071315F /* TaskManagerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACDC780A2035E3360071315F /* TaskManagerApp.xcdatamodeld */; };
 		ACDC780E2035E3360071315F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDC780D2035E3360071315F /* Assets.xcassets */; };
 		ACDC78112035E3360071315F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDC780F2035E3360071315F /* LaunchScreen.storyboard */; };
 		ACDC781C2035E3370071315F /* TaskManagerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC781B2035E3370071315F /* TaskManagerAppTests.swift */; };
 		ACDC78272035E3370071315F /* TaskManagerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78262035E3370071315F /* TaskManagerAppUITests.swift */; };
+		ACDC78382035FF220071315F /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC78372035FF220071315F /* TaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,7 @@
 /* Begin PBXFileReference section */
 		ACDC78002035E3360071315F /* TaskManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDC78032035E3360071315F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ACDC78052035E3360071315F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ACDC78052035E3360071315F /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		ACDC78082035E3360071315F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ACDC780B2035E3360071315F /* TaskManagerApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskManagerApp.xcdatamodel; sourceTree = "<group>"; };
 		ACDC780D2035E3360071315F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		ACDC78222035E3370071315F /* TaskManagerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDC78262035E3370071315F /* TaskManagerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITests.swift; sourceTree = "<group>"; };
 		ACDC78282035E3370071315F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACDC78372035FF220071315F /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +101,10 @@
 		ACDC78022035E3360071315F /* TaskManagerApp */ = {
 			isa = PBXGroup;
 			children = (
+				ACDC78362035FD2F0071315F /* Model */,
+				ACDC78352035FD260071315F /* View */,
+				ACDC78342035FD030071315F /* Controller */,
 				ACDC78032035E3360071315F /* AppDelegate.swift */,
-				ACDC78052035E3360071315F /* ViewController.swift */,
 				ACDC78072035E3360071315F /* Main.storyboard */,
 				ACDC780D2035E3360071315F /* Assets.xcassets */,
 				ACDC780F2035E3360071315F /* LaunchScreen.storyboard */,
@@ -126,6 +130,29 @@
 				ACDC78282035E3370071315F /* Info.plist */,
 			);
 			path = TaskManagerAppUITests;
+			sourceTree = "<group>";
+		};
+		ACDC78342035FD030071315F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ACDC78052035E3360071315F /* MainVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ACDC78352035FD260071315F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ACDC78372035FF220071315F /* TaskCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ACDC78362035FD2F0071315F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,8 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACDC78382035FF220071315F /* TaskCell.swift in Sources */,
 				ACDC780C2035E3360071315F /* TaskManagerApp.xcdatamodeld in Sources */,
-				ACDC78062035E3360071315F /* ViewController.swift in Sources */,
+				ACDC78062035E3360071315F /* MainVC.swift in Sources */,
 				ACDC78042035E3360071315F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
