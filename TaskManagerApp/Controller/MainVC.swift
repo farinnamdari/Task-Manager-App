@@ -22,7 +22,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         taskTableView.delegate = self
         taskTableView.dataSource = self
         
-        //generateTestData()  // remove this
+        generateTestData()  // remove this
         attemptFetch(index: 0)
     }
     
@@ -201,13 +201,19 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     
     func generateTestData() {
         let task1 = Task(context: context)
-        task1.title = "Finish Proj 1"
+        task1.title = "Task for Farin"
         task1.state = 0
         
-        let task2 = Task(context: context)
-        task2.title = "Finish Proj 2"
-        task2.state = 1
+        let keyword = Keyword(context: context)
+        keyword.title = "Math"
+        keyword.taskTitle = "Task for Farin"
+        task1.setValue(NSSet(object: keyword), forKey: "taskToKeyword")
+        ad.saveContext()
         
+        let keyword2 = Keyword(context: context)
+        keyword2.title = "CS"
+        keyword2.taskTitle = "Task for Farin"
+        task1.setValue(NSSet(object: keyword2), forKey: "taskToKeyword")
         ad.saveContext()
     }
 }
