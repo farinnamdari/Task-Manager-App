@@ -8,12 +8,17 @@
 
 import UIKit
 import CoreData
+import Firebase
 
-class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
-
+class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBOutlet weak var taskImage: UIImageView!
     @IBOutlet weak var titleTxtField: CustomTextField!
     @IBOutlet weak var detailsTxtField: CustomTextField!
     @IBOutlet weak var keywordTableView: UITableView!
+    
+    var imagePicker: UIImagePickerController!
+    var imageSelected = false
     
     var frController: NSFetchedResultsController<Keyword>!
     var taskToEdit: Task?
@@ -35,12 +40,15 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if taskToEdit != nil {
             loadTaskData()
         }
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
     }
     
     // MARK: - UITableViewDelegate/UITableViewDataSource methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let sections = frController.sections {
-            //print("\(frController.fetchedObjects![0])")
+        if let sections = frController.sections, sections.count > 0 {
             return sections.count
         }
         
@@ -65,9 +73,9 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
-    }
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        return .delete
+//    }
     
     // MARK: - NSFetchedResultsControllerDelegate methods
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -113,8 +121,24 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            taskImage.image = image
+            imageSelected = true
+        } else {
+            print("Valid image was not selected.")
+        }
+        
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
 
     // MARK: - IBAction
+    @IBAction func addImageTapped(_ sender: UITapGestureRecognizer) {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     @IBAction func saveBtnPressed(_ sender: UIButton) {
         var task: Task!
         
@@ -133,14 +157,9 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         for keyword in keywords {
             task.setValue(NSSet(object: keyword), forKey: "taskToKeyword")
         }
-
-        // task.toKeyword  = array of keywords
-        //task?.toKeyword
-        //let keyword = Keyword(context: context)
-        //keyword.title =
-        //task.toKeyword?.adding(keyword)
         
         ad.saveContext()
+        uploadToFIRStorage() 
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -152,16 +171,23 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         _ = navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func addKeywordBtnPressed(_ sender: UIButton) {
         let keyword = Keyword(context: context)
-        keyword.title = "New Title"
+        keyword.title = ""
         keyword.taskTitle = (taskToEdit == nil) ? titleTxtField.text : taskToEdit?.title
         
-//        taskToEdit?.addToTaskToKeyword(keyword)
-//        taskToEdit?.setValue(NSSet(object: keyword), forKey: "taskToKeyword")
-        //keywords.append(keyword)
+        if taskToEdit == nil {
+            let task = Task(context: context)
+            
+            task.title = titleTxtField.text
+            taskToEdit = task
+        }
+
+        taskToEdit?.addToTaskToKeyword(keyword)
         
         ad.saveContext()
+        attemptFetch()
         keywordTableView.reloadData()
     }
     
@@ -171,7 +197,12 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let dataSort = NSSortDescriptor(key: "title", ascending: true)
 
         fetchRequest.sortDescriptors = [dataSort]
-        fetchRequest.predicate = NSPredicate(format: "ANY keywordToTask.title == %@", taskToEdit!.title!)
+        
+        if taskToEdit != nil {
+            fetchRequest.predicate = NSPredicate(format: "keywordToTask.title == %@", taskToEdit!.title!)
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "keywordToTask.title IN %@", [])
+        }
 
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -211,6 +242,27 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let keyword = frController.object(at: indexPath as IndexPath)
 
         cell.configureCell(keyword: keyword)
+    }
+    
+    func uploadToFIRStorage() {
+        guard let image = taskImage.image, imageSelected else {
+            print("An image must be selected")
+            return
+        }
+        
+        if let imgData = UIImageJPEGRepresentation(image, 0.2) {
+            let imgUid = NSUUID().uuidString
+            let metadata = StorageMetadata()
+            
+            metadata.contentType = "image/jpeg"
+            DataService.instance.REF_UPLOADED_IMAGES.child(imgUid).putData(imgData, metadata: metadata, completion: { (metadata, err) in
+                if err != nil {
+                    print("Unable to upload image to Firebase storage. - Error: \(err.debugDescription)")
+                } else {
+                    print("Successfully uploaded to Firebase storage.")
+                }
+            })
+        }
     }
     
     func generateKeyword() {

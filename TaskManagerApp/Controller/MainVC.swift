@@ -22,7 +22,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         taskTableView.delegate = self
         taskTableView.dataSource = self
         
-        generateTestData()  // remove this
+        //generateTestData()  // remove this
         attemptFetch(index: 0)
     }
     
