@@ -47,6 +47,7 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // MARK: - UITableViewDelegate/UITableViewDataSource methods
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         if let sections = frController.sections, sections.count > 0 {
             return sections.count
@@ -73,11 +74,8 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        return .delete
-//    }
-    
     // MARK: - NSFetchedResultsControllerDelegate methods
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         keywordTableView.beginUpdates()
     }
@@ -117,12 +115,12 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    /* fix it when done with cell*/
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 50
     }
     
     // MARK: - UIImagePickerControllerDelegate
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             taskImage.image = image
@@ -135,6 +133,7 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
 
     // MARK: - IBAction
+    
     @IBAction func addImageTapped(_ sender: UITapGestureRecognizer) {
         present(imagePicker, animated: true, completion: nil)
     }
@@ -153,13 +152,22 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         task.state = 0
-
-        for keyword in keywords {
-            task.setValue(NSSet(object: keyword), forKey: "taskToKeyword")
+        
+        if let sections = frController.sections {
+            for section in 0 ..< sections.count {
+                let rowCount = keywordTableView.numberOfRows(inSection: section)
+                
+                for row in 0 ..< rowCount {
+                    let cell = keywordTableView.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! KeywordCell
+                    let key = task.taskToKeyword?.allObjects[row] as! Keyword
+                    
+                    key.title = cell.titleTxtField.text
+                }
+            }
         }
         
         ad.saveContext()
-        uploadToFIRStorage() 
+        uploadToFIRStorage()
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -191,7 +199,8 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         keywordTableView.reloadData()
     }
     
-    // MARK: -
+    // MARK: - helper methods
+    
     func attemptFetch() {
         let fetchRequest: NSFetchRequest<Keyword> = Keyword.fetchRequest()        
         let dataSort = NSSortDescriptor(key: "title", ascending: true)
@@ -214,27 +223,14 @@ class TaskDetailsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         } catch {
             let err = error as NSError
             
-            print("Error: \(err)")     // replace with fatalerror
-        }
-        
+            print("Error: \(err)")
+        }        
     }
     
     func loadTaskData() {
         if let task = taskToEdit {
             titleTxtField.text = task.title
             detailsTxtField.text = task.details
-            
-            if let keywords = task.taskToKeyword {
-                print("keywords: \(keywords)")
-                print("\(keywords.count)")
-                
-                print("\(keywords.allObjects)")
-            }
-            /*
-             if let keywords = task.toKeyword {
-                populate table view with keywords
-             }
-            */
         }
     }
 

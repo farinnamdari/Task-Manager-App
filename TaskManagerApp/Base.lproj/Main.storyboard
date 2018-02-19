@@ -63,6 +63,7 @@
                                                     <constraints>
                                                         <constraint firstItem="unV-ek-6MN" firstAttribute="leading" secondItem="fjI-qK-zJD" secondAttribute="leading" constant="8" id="5q0-vf-SbW"/>
                                                         <constraint firstAttribute="bottom" secondItem="unV-ek-6MN" secondAttribute="bottom" constant="10" id="Ll0-KM-bSK"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="unV-ek-6MN" secondAttribute="trailing" constant="20" symbolic="YES" id="bbs-DG-mfr"/>
                                                         <constraint firstItem="unV-ek-6MN" firstAttribute="top" secondItem="fjI-qK-zJD" secondAttribute="top" constant="10" id="ueI-oG-5ig"/>
                                                     </constraints>
                                                 </view>
@@ -121,15 +122,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MSI-IT-YKC">
-                                <rect key="frame" x="20" y="237" width="330" height="267"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MSI-IT-YKC">
+                                <rect key="frame" x="20" y="239" width="335" height="270"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="270" id="5i5-rm-0yU"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeywordCell" rowHeight="72" id="R5M-Ms-dRd" customClass="KeywordCell" customModule="TaskManagerApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="330" height="72"/>
+                                        <rect key="frame" x="0.0" y="28" width="335" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R5M-Ms-dRd" id="lO4-JG-hSE">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBB-5Y-PkS">
@@ -157,7 +161,7 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jkd-N1-Hjv">
-                                <rect key="frame" x="20" y="84" width="330" height="40"/>
+                                <rect key="frame" x="20" y="84" width="335" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePick" translatesAutoresizingMaskIntoConstraints="NO" id="HBT-VQ-HY4">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -171,11 +175,11 @@
                                         </connections>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S34-tv-23Y" customClass="CustomTextField" customModule="TaskManagerApp" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="0.0" width="280" height="40"/>
+                                        <rect key="frame" x="50" y="0.0" width="285" height="40"/>
                                         <color key="backgroundColor" white="0.85356987847222221" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="BDM-8r-4gg"/>
-                                            <constraint firstAttribute="width" constant="280" id="RKw-fE-hSW"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="RKw-fE-hSW"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -184,7 +188,7 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="orO-T7-XgA" customClass="CustomTextField" customModule="TaskManagerApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="134" width="330" height="90"/>
+                                <rect key="frame" x="20" y="134" width="335" height="90"/>
                                 <color key="backgroundColor" white="0.85356987849999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="2YE-Od-gtC"/>
@@ -193,7 +197,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4z-AO-Wro">
-                                <rect key="frame" x="20" y="617" width="330" height="40"/>
+                                <rect key="frame" x="20" y="617" width="335" height="40"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="KE8-aX-nv2"/>
@@ -206,11 +210,11 @@
                                     <action selector="saveBtnPressed:" destination="owD-Ex-mAX" eventType="touchUpInside" id="Zgp-ov-bbh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBa-Sr-Uz5">
-                                <rect key="frame" x="115" y="523" width="140" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBa-Sr-Uz5">
+                                <rect key="frame" x="127.5" y="524" width="120" height="40"/>
                                 <color key="backgroundColor" white="0.85356987849999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="MQY-eJ-4XY"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="OD7-7V-3Fa"/>
                                     <constraint firstAttribute="height" constant="40" id="Pwm-P2-mLX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
@@ -227,6 +231,7 @@
                             <constraint firstItem="YBa-Sr-Uz5" firstAttribute="centerX" secondItem="aQ1-UY-Ulm" secondAttribute="centerX" id="ABS-vj-a21"/>
                             <constraint firstItem="orO-T7-XgA" firstAttribute="leading" secondItem="JzM-a1-99I" secondAttribute="leading" constant="20" id="B5e-4g-ESJ"/>
                             <constraint firstItem="d4z-AO-Wro" firstAttribute="leading" secondItem="JzM-a1-99I" secondAttribute="leading" constant="20" id="Ckm-tz-EQa"/>
+                            <constraint firstItem="YBa-Sr-Uz5" firstAttribute="top" secondItem="MSI-IT-YKC" secondAttribute="bottom" constant="15" id="FP5-Sn-xl1"/>
                             <constraint firstItem="Jkd-N1-Hjv" firstAttribute="leading" secondItem="JzM-a1-99I" secondAttribute="leading" constant="20" id="Fwf-On-HYi"/>
                             <constraint firstItem="Jkd-N1-Hjv" firstAttribute="top" secondItem="JzM-a1-99I" secondAttribute="top" constant="20" id="KLO-h8-M9x"/>
                             <constraint firstItem="MSI-IT-YKC" firstAttribute="top" secondItem="orO-T7-XgA" secondAttribute="bottom" constant="15" id="OvC-ed-em0"/>
